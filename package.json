@@ -4,9 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "postinstall": "npm cache clean --force ",
-    "postinstall": "npm install puppeteer",
-
+    "postinstall": "npm install puppeteer && node node_modules/puppeteer/install.js",
     "start": "node app.js",
 "dev": "nodemon app.js",
  "test": "echo \"Error: no test specified\" && exit 1"
