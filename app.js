@@ -24,7 +24,27 @@ const transporter = nodemailer.createTransport({
     pass: 'uxeripijidfamvtj',
   },
 });
+// API endpoint to send emails
+app.post('/api/send-single-emails', (req, res) => {
+  const { recipient, subject, content } = req.body;
 
+  const mailOptions = {
+    from: 'dtkaccounnt@gmail.com', // Replace with your email
+    to: recipient,
+    subject: subject,
+    text: content,
+  };
+
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+     console.error('Error sending email:', error);
+      res.status(200).json({ error: 'Email could not be sent.' });
+    } else {
+      console.log('Email sent:', info.response);
+      res.status(200).json({ message: 'Email sent successfully.' });
+    }
+  });
+});
 // API endpoint to send the email
 app.post('/api/send-email', async (req, res) => {
   try {
