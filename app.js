@@ -213,7 +213,7 @@ async function generatePDF(shipper) {
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center;
-        background-image: url(https://shippers.org.gh/wp-content/uploads/2023/08/${ shipper.category }.png);
+        background-image: url(https://shippers.org.gh/wp-content/uploads/2023/09/${ shipper.category }.png);
         display: flex;
         justify-content: center;
         align-items: center;
