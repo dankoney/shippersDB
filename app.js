@@ -45,6 +45,36 @@ app.post('/api/send-single-emails', (req, res) => {
     }
   });
 });
+
+
+// API endpoint for sending password reset email from PHP shipper registration application
+app.post('/api/send-reset-email', (req, res) => {
+  const { email, token } = req.body;
+
+  const resetLink = `https://shippers.org.gh/shipperreg/reset_password.php?token=${token}`;
+
+  const mailOptions = {
+    from: 'dtkaccounnt@gmail.com',
+    to: email,
+    subject: 'Password Reset Request',
+    text: `Click the link below to reset your password: ${resetLink}`,
+    html: `<p>Click the link below to reset your password:</p><a href="${resetLink}">${resetLink}</a><p>This link will expire in 1 hour.</p>`,
+  };
+
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.error('Error sending email:', error);
+      res.status(500).json({ error: 'Failed to send email.' });
+    } else {
+      console.log('Email sent:', info.response);
+      res.status(200).json({ message: 'Password reset link sent successfully.' });
+    }
+  });
+});
+
+
+
+
 // API endpoint to send the email
 app.post('/api/send-email', async (req, res) => {
   try {
